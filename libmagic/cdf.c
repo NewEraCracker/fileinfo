@@ -328,8 +328,8 @@ cdf_read_header(const cdf_info_t *info, cdf_header_t *h)
 	if (h->h_magic != CDF_MAGIC) {
 		DPRINTF(("Bad magic 0x%" INT64_T_FORMAT "x != 0x%"
 		    INT64_T_FORMAT "x\n",
-		    (unsigned long long)h->h_magic,
-		    (unsigned long long)CDF_MAGIC));
+		    (uint64_t)h->h_magic,
+		    (uint64_t)CDF_MAGIC));
 		goto out;
 	}
 	if (h->h_sec_size_p2 > 20) {

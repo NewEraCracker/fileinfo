@@ -30,7 +30,40 @@
  */
 
 #include "php.h"
+#if !defined(HAVE_VASPRINTF) && (PHP_VERSION_ID < 50300)
+#ifndef va_copy
+# ifdef __va_copy
+#  define va_copy(ap1, ap2)         __va_copy((ap1), (ap2))
+# else
+#  define va_copy(ap1, ap2)         memcpy((&ap1), (&ap2), sizeof(va_list))
+# endif
+#endif
+int my_vasprintf(char **buf, const char *format, va_list ap) /* {{{ */
+{
+	va_list ap2;
+	int cc;
+
+	va_copy(ap2, ap);
+	cc = ap_php_vsnprintf(NULL, 0, format, ap2);
+	va_end(ap2);
+
+	*buf = NULL;
+
+	if (cc >= 0) {
+		if ((*buf = malloc(++cc)) != NULL) {
+			if ((cc = ap_php_vsnprintf(*buf, cc, format, ap)) < 0) {
+				free(*buf);
+				*buf = NULL;
+			}
+		}
+	}
+
+	return cc;
+}
+#define vasprintf my_vasprintf
+#else
 #include "main/snprintf.h"
+#endif
 
 #include "file.h"
 

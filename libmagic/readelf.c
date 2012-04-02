@@ -947,8 +947,8 @@ doshn(struct magic_set *ms, int clazz, int swap, int fd, off_t off, int num,
 					    ", with unknown capability "
 					    "0x%" INT64_T_FORMAT "x = 0x%"
 					    INT64_T_FORMAT "x",
-					    (unsigned long long)xcap_tag,
-					    (unsigned long long)xcap_val) == -1)
+					    (uint64_t)xcap_tag,
+					    (uint64_t)xcap_val) == -1)
 						return -1;
 					break;
 				}
@@ -994,12 +994,12 @@ doshn(struct magic_set *ms, int clazz, int swap, int fd, off_t off, int num,
 				if (file_printf(ms,
 				    " unknown hardware capability 0x%"
 				    INT64_T_FORMAT "x",
-				    (unsigned long long)cap_hw1) == -1)
+				    (uint64_t)cap_hw1) == -1)
 					return -1;
 		} else {
 			if (file_printf(ms,
 			    " hardware capability 0x%" INT64_T_FORMAT "x",
-			    (unsigned long long)cap_hw1) == -1)
+			    (uint64_t)cap_hw1) == -1)
 				return -1;
 		}
 	}
@@ -1016,7 +1016,7 @@ doshn(struct magic_set *ms, int clazz, int swap, int fd, off_t off, int num,
 			if (file_printf(ms,
 			    ", with unknown software capability 0x%"
 			    INT64_T_FORMAT "x",
-			    (unsigned long long)cap_sf1) == -1)
+			    (uint64_t)cap_sf1) == -1)
 				return -1;
 	}
 	return 0;

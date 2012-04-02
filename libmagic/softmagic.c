@@ -2025,7 +2025,7 @@ magiccheck(struct magic_set *ms, struct magic *m)
 	case 'x':
 		if ((ms->flags & MAGIC_DEBUG) != 0)
 			(void) fprintf(stderr, "%" INT64_T_FORMAT
-			    "u == *any* = 1\n", (unsigned long long)v);
+			    "u == *any* = 1\n", (uint64_t)v);
 		matched = 1;
 		break;
 
@@ -2033,16 +2033,16 @@ magiccheck(struct magic_set *ms, struct magic *m)
 		matched = v != l;
 		if ((ms->flags & MAGIC_DEBUG) != 0)
 			(void) fprintf(stderr, "%" INT64_T_FORMAT "u != %"
-			    INT64_T_FORMAT "u = %d\n", (unsigned long long)v,
-			    (unsigned long long)l, matched);
+			    INT64_T_FORMAT "u = %d\n", (uint64_t)v,
+			    (uint64_t)l, matched);
 		break;
 
 	case '=':
 		matched = v == l;
 		if ((ms->flags & MAGIC_DEBUG) != 0)
 			(void) fprintf(stderr, "%" INT64_T_FORMAT "u == %"
-			    INT64_T_FORMAT "u = %d\n", (unsigned long long)v,
-			    (unsigned long long)l, matched);
+			    INT64_T_FORMAT "u = %d\n", (uint64_t)v,
+			    (uint64_t)l, matched);
 		break;
 
 	case '>':
@@ -2051,15 +2051,15 @@ magiccheck(struct magic_set *ms, struct magic *m)
 			if ((ms->flags & MAGIC_DEBUG) != 0)
 				(void) fprintf(stderr, "%" INT64_T_FORMAT
 				    "u > %" INT64_T_FORMAT "u = %d\n",
-				    (unsigned long long)v,
-				    (unsigned long long)l, matched);
+				    (uint64_t)v,
+				    (uint64_t)l, matched);
 		}
 		else {
 			matched = (int64_t) v > (int64_t) l;
 			if ((ms->flags & MAGIC_DEBUG) != 0)
 				(void) fprintf(stderr, "%" INT64_T_FORMAT
 				    "d > %" INT64_T_FORMAT "d = %d\n",
-				    (long long)v, (long long)l, matched);
+				    (uint64_t)v, (uint64_t)l, matched);
 		}
 		break;
 
@@ -2069,15 +2069,15 @@ magiccheck(struct magic_set *ms, struct magic *m)
 			if ((ms->flags & MAGIC_DEBUG) != 0)
 				(void) fprintf(stderr, "%" INT64_T_FORMAT
 				    "u < %" INT64_T_FORMAT "u = %d\n",
-				    (unsigned long long)v,
-				    (unsigned long long)l, matched);
+				    (uint64_t)v,
+				    (uint64_t)l, matched);
 		}
 		else {
 			matched = (int64_t) v < (int64_t) l;
 			if ((ms->flags & MAGIC_DEBUG) != 0)
 				(void) fprintf(stderr, "%" INT64_T_FORMAT
 				    "d < %" INT64_T_FORMAT "d = %d\n",
-				     (long long)v, (long long)l, matched);
+				     (uint64_t)v, (uint64_t)l, matched);
 		}
 		break;
 
@@ -2086,8 +2086,8 @@ magiccheck(struct magic_set *ms, struct magic *m)
 		if ((ms->flags & MAGIC_DEBUG) != 0)
 			(void) fprintf(stderr, "((%" INT64_T_FORMAT "x & %"
 			    INT64_T_FORMAT "x) == %" INT64_T_FORMAT
-			    "x) = %d\n", (unsigned long long)v,
-			    (unsigned long long)l, (unsigned long long)l,
+			    "x) = %d\n", (uint64_t)v,
+			    (uint64_t)l, (uint64_t)l,
 			    matched);
 		break;
 
@@ -2096,8 +2096,8 @@ magiccheck(struct magic_set *ms, struct magic *m)
 		if ((ms->flags & MAGIC_DEBUG) != 0)
 			(void) fprintf(stderr, "((%" INT64_T_FORMAT "x & %"
 			    INT64_T_FORMAT "x) != %" INT64_T_FORMAT
-			    "x) = %d\n", (unsigned long long)v,
-			    (unsigned long long)l, (unsigned long long)l,
+			    "x) = %d\n", (uint64_t)v,
+			    (uint64_t)l, (uint64_t)l,
 			    matched);
 		break;
 
