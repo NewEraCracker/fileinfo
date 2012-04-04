@@ -30,6 +30,8 @@
  */
 
 #include "php.h"
+#include "main/snprintf.h"
+
 #if !defined(HAVE_VASPRINTF) && (PHP_VERSION_ID < 50300)
 #ifndef va_copy
 # ifdef __va_copy
@@ -61,8 +63,6 @@ int my_vasprintf(char **buf, const char *format, va_list ap) /* {{{ */
 	return cc;
 }
 #define vasprintf my_vasprintf
-#else
-#include "main/snprintf.h"
 #endif
 
 #include "file.h"

@@ -53,6 +53,7 @@ FILE_RCSID("@(#)$File: apprentice.c,v 1.173 2011/12/08 12:38:24 rrt Exp $")
 #include "win32/unistd.h"
 #if _MSC_VER <= 1300
 #if PHP_VERSION_ID < 50300
+#include "win32/php_stdint.h"
 int64_t my_strtoui64(const char *nptr, char **endptr, int base)
 {
 	const char *s;
