@@ -2059,7 +2059,7 @@ magiccheck(struct magic_set *ms, struct magic *m)
 			if ((ms->flags & MAGIC_DEBUG) != 0)
 				(void) fprintf(stderr, "%" INT64_T_FORMAT
 				    "d > %" INT64_T_FORMAT "d = %d\n",
-				    (uint64_t)v, (uint64_t)l, matched);
+				    (int64_t)v, (int64_t)l, matched);
 		}
 		break;
 
@@ -2077,7 +2077,7 @@ magiccheck(struct magic_set *ms, struct magic *m)
 			if ((ms->flags & MAGIC_DEBUG) != 0)
 				(void) fprintf(stderr, "%" INT64_T_FORMAT
 				    "d < %" INT64_T_FORMAT "d = %d\n",
-				     (uint64_t)v, (uint64_t)l, matched);
+				     (int64_t)v, (int64_t)l, matched);
 		}
 		break;
 

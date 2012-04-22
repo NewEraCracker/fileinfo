@@ -173,7 +173,7 @@ cdf_ctime(const time_t *sec)
 	if (ptr != NULL)
 		return ptr;
 	(void)snprintf(ctbuf, sizeof(ctbuf), "*Bad* 0x%16.16llx\n",
-	    (uint64_t)*sec);
+	    (int64_t)*sec);
 	return ctbuf;
 }
 
