@@ -170,7 +170,7 @@ int64_t my_strtoui64(const char *nptr, char **endptr, int base)
 }
 #define _strtoui64 my_strtoui64
 #else
-#include "win32/php_strtoi64.h"
+# include "win32/php_strtoi64.h"
 #endif
 #endif
 #define strtoull _strtoui64
