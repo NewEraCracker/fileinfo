@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | PHP Version 5                                                        |
   +----------------------------------------------------------------------+
-  | Copyright (c) 1997-2013 The PHP Group                                |
+  | Copyright (c) 1997-2014 The PHP Group                                |
   +----------------------------------------------------------------------+
   | This source file is subject to version 3.0 of the PHP license,       |
   | that is bundled with this package in the file LICENSE, and is        |
@@ -98,13 +98,18 @@ PHP_FILEINFO_API zend_object_value finfo_objects_new(zend_class_entry *class_typ
 {
 	zend_object_value retval;
 	struct finfo_object *intern;
+#if PHP_VERSION_ID < 50400
 	zval *tmp;
-
+#endif
 	intern = emalloc(sizeof(struct finfo_object));
 	memset(intern, 0, sizeof(struct finfo_object));
 
 	zend_object_std_init(&intern->zo, class_type TSRMLS_CC);
+#if PHP_VERSION_ID < 50400
 	zend_hash_copy(intern->zo.properties, &class_type->default_properties, (copy_ctor_func_t) zval_property_ctor,(void *) &tmp, sizeof(zval *));
+#else
+	object_properties_init(&intern->zo, class_type);
+#endif
 
 	intern->ptr = NULL;
 
@@ -301,14 +306,18 @@ PHP_FUNCTION(finfo_open)
 	FILEINFO_DECLARE_INIT_OBJECT(object)
 	char resolved_path[MAXPATHLEN];
 
+#if PHP_VERSION_ID < 50400
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|ls", &options, &file, &file_len) == FAILURE) {
+#else
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|lp", &options, &file, &file_len) == FAILURE) {
+#endif
 		FILEINFO_DESTROY_OBJECT(object);
 		RETURN_FALSE;
 	}
-	
+
 	if (object) {
 		struct finfo_object *finfo_obj = (struct finfo_object*)zend_object_store_get_object(object TSRMLS_CC);
-		
+
 		if (finfo_obj->ptr) {
 			magic_close(finfo_obj->ptr->magic);
 			efree(finfo_obj->ptr);
@@ -319,6 +328,7 @@ PHP_FUNCTION(finfo_open)
 	if (file_len == 0) {
 		file = NULL;
 	} else if (file && *file) { /* user specified file, perform open_basedir checks */
+#if PHP_VERSION_ID < 50400
 		if (strlen(file) != file_len) {
 			FILEINFO_DESTROY_OBJECT(object);
 			RETURN_FALSE;
@@ -328,6 +338,7 @@ PHP_FUNCTION(finfo_open)
 			RETURN_FALSE;
 		}
 		file = resolved_path;
+#endif
 
 #if PHP_API_VERSION < 20100412
 		if ((PG(safe_mode) && (!php_checkuid(file, NULL, CHECKUID_CHECK_FILE_AND_DIR))) || php_check_open_basedir(file TSRMLS_CC)) {
@@ -337,6 +348,13 @@ PHP_FUNCTION(finfo_open)
 			FILEINFO_DESTROY_OBJECT(object);
 			RETURN_FALSE;
 		}
+#if PHP_VERSION_ID >= 50400
+		if (!expand_filepath_with_mode(file, resolved_path, NULL, 0, CWD_EXPAND TSRMLS_CC)) {
+			FILEINFO_DESTROY_OBJECT(object);
+			RETURN_FALSE;
+		}
+		file = resolved_path;
+#endif
 	}
 
 	finfo = emalloc(sizeof(struct php_fileinfo));
