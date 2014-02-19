@@ -250,7 +250,7 @@ struct magic {
 #ifdef ENABLE_CONDITIONALS
 	uint8_t cond;		/* conditional type */
 #else
-	uint8_t dummy;	
+	uint8_t dummy;
 #endif
 	uint8_t factor_op;
 #define		FILE_FACTOR_OP_PLUS	'+'
@@ -424,7 +424,7 @@ protected int file_tryelf(struct magic_set *, int, const unsigned char *,
     size_t);
 protected int file_trycdf(struct magic_set *, int, const unsigned char *,
     size_t);
-#ifdef PHP_FILEINFO_UNCOMPRESS 
+#ifdef PHP_FILEINFO_UNCOMPRESS
 protected int file_zmagic(struct magic_set *, int, const char *,
     const unsigned char *, size_t);
 #endif

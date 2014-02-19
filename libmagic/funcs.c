@@ -42,8 +42,8 @@ FILE_RCSID("@(#)$File: funcs.c,v 1.61 2012/10/30 23:11:51 christos Exp $")
 #include <wctype.h>
 #endif
 
-#ifndef SIZE_MAX 
-# define SIZE_MAX ((size_t) -1) 
+#ifndef SIZE_MAX
+# define SIZE_MAX ((size_t) -1)
 #endif
 
 #ifndef PREG_OFFSET_CAPTURE
@@ -88,7 +88,7 @@ file_error_core(struct magic_set *ms, int error, const char *f, va_list va,
     size_t lineno)
 {
 	char *buf = NULL;
-	
+
 	/* Only the first error is ok */
 	if (ms->event_flags & EVENT_HAD_ERR)
 		return;
@@ -100,13 +100,13 @@ file_error_core(struct magic_set *ms, int error, const char *f, va_list va,
 
 	vspprintf(&buf, 0, f, va);
 	va_end(va);
-	
+
 	if (error > 0) {
 		file_printf(ms, "%s (%s)", (*buf ? buf : ""), strerror(error));
 	} else if (*buf) {
 		file_printf(ms, "%s", buf);
 	}
-	
+
 	if (buf) {
 		efree(buf);
 	}
@@ -438,7 +438,7 @@ file_printedlen(const struct magic_set *ms)
 }
 
 
-protected int 
+protected int
 file_replace(struct magic_set *ms, const char *pat, const char *rep)
 {
 	zval *patt;
