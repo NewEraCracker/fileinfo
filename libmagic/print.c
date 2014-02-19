@@ -28,6 +28,7 @@
 /*
  * print.c - debugging printout routines
  */
+
 #define _GNU_SOURCE
 #include "php.h"
 #include "main/snprintf.h"
