@@ -16,7 +16,7 @@ $finfo = finfo_open( FILEINFO_MIME, $magicFile );
 echo "*** Testing finfo_file() : regex rules ***\n";
 
 // Calling finfo_file() with all possible arguments
-$file = __DIR__ . '/resources/test.awk';
+$file = dirname(__FILE__) . '/resources/test.awk';
 var_dump( finfo_file( $finfo, $file ) );
 var_dump( finfo_file( $finfo, $file, FILEINFO_CONTINUE ) );
 

@@ -9,8 +9,8 @@ finfo_file(): Files and directories inside an stream
 $fp = finfo_open(FILEINFO_MIME_TYPE);
 $results = array();
 
-$zip = __DIR__ . "/resources/dir.zip";
-$stream = "zip://" . __DIR__ . "/resources/dir.zip";
+$zip = dirname(__FILE__) . "/resources/dir.zip";
+$stream = "zip://" . dirname(__FILE__) . "/resources/dir.zip";
 $dir = $stream . "#dir/";
 $png = $stream . "#dir/test.png";
 

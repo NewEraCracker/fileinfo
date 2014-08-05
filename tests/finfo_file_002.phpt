@@ -8,7 +8,7 @@ finfo_file(): Testing mime types
 $fp = finfo_open(FILEINFO_MIME_TYPE);
 $results = array();
 
-foreach (glob(__DIR__ . "/resources/*") as $filename) {
+foreach (glob(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . '*') as $filename) {
 	if (is_file($filename)) {
 		$results["$filename"] = finfo_file($fp, $filename);
 	}

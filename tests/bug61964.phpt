@@ -10,7 +10,7 @@ $magic_file = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'magic';
 $ret = @finfo_open(FILEINFO_NONE, $magic_file . ".non-exits");
 var_dump($ret);
 
-$dir = __DIR__ . "/test-folder";
+$dir = dirname(__FILE__) . "/test-folder";
 @mkdir($dir);
 
 $magic_file_copy = $dir . "/magic.copy";
